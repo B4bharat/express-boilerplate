@@ -1,0 +1,26 @@
+{
+  "port": 80,
+  "db": {
+    "aerospike": [
+      {
+        "addr": "10.51.1.206",
+        "port": 3000
+      }
+    ],
+    "mongo": {
+      "connectionString": "mongodb://10.51.0.170:27017/bookmyshow"
+    }
+  },
+  "log": {
+    "queueConfig": {
+      "RabbitMQ": {
+        "host": "test-rmq.sit.n3b.bookmyshow.org",
+        "port": 5672,
+        "login": "nodelib",
+        "password": "nodelib",
+        "vhost": "logs",
+        "exchange": "logs"
+      }
+    }
+  }
+}
