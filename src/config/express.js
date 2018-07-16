@@ -8,12 +8,11 @@ const passport = require('passport');
 const winston = require('winston');
 const expressWinston = require('express-winston');
 const strategies = require('./passport');
-const error = require('../api/middlewares/error');
+const error = require('../app/middlewares/error');
 const { env } = require('./vars');
 
 // API Routes
-const userRoutes = require('../api/users/user.route');
-const authRoutes = require('../api/auth/auth.route');
+const userRoutes = require('../app/users/user.route');
 
 /**
  * Express instance
@@ -79,7 +78,6 @@ if (env === 'development') {
 
 // mount api routes
 app.use('/api/users', userRoutes);
-app.use('/api/auth', authRoutes);
 
 // if error is not an instanceOf APIError, convert it.
 app.use(error.converter);
