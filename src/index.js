@@ -8,13 +8,13 @@ const mongoose = require('./config/mongoose');
 mongoose.connect();
 
 /**
- * Logging
- * Routing
+ X* Logging
+ * Routing/Folder Structure
  * Configuration Environment
  * Eslint, prettier and husky[pre-commit hooks]
  * MongoDB Connection
- * Error Logging using Winston
  * Error handling middleware
+ * Error Logging using Winston
  * Express Validation middleware
  * Authentication
  * Documentation [Swagger]
@@ -31,7 +31,7 @@ mongoose.connect();
 app.listen(port, () => console.info(`server started on port ${port} (${env})`));
 
 /**
-* Exports express
-* @public
-*/
+ * Exports express
+ * @public
+ */
 module.exports = app;
