@@ -1,27 +1,17 @@
-const app = require('./app');
+// make bluebird default Promise
+Promise = require('bluebird'); // eslint-disable-line no-global-assign
+const { port, env } = require('./config/vars');
+const app = require('./config/express');
+const mongoose = require('./config/mongoose');
+
+// open mongoose connection
+mongoose.connect();
+
+// listen to requests
+app.listen(port, () => console.info(`server started on port ${port} (${env})`));
 
 /**
- * Logging
- * Routing
- * Configuration Environment
- * Eslint, prettier and husky[pre-commit hooks]
- * MongoDB Connection
- * Error Logging using Winston
- * Error handling middleware
- * Express Validation middleware
- * Authentication
- * Documentation [Swagger]
- * Unit Testing
- * Node Best Practices Github
- * Security Best Practices
- * Performance Best Practices
- * npm scripts
- * ReadME
- * GraphQL
- */
-// const config = require(`./config/${process.env.NODE_ENV}.json`);
-
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+* Exports express
+* @public
+*/
+module.exports = app;
