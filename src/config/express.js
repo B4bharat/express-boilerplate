@@ -4,10 +4,8 @@ const compress = require('compression');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const helmet = require('helmet');
-const passport = require('passport');
 const winston = require('winston');
 const expressWinston = require('express-winston');
-const strategies = require('./passport');
 const error = require('../app/middlewares/error');
 const { env } = require('./vars');
 
@@ -37,9 +35,7 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
-// enable authentication
-app.use(passport.initialize());
-passport.use('jwt', strategies.jwt);
+// TODO: enable JWT authentication
 
 // enable detailed API logging in dev env
 if (env === 'development') {

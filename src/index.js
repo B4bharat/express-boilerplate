@@ -9,7 +9,8 @@ mongoose.connect();
 
 /**
  X* Logging
- * Routing/Folder Structure
+ X* Routing/Folder Structure
+ * Express JWT for Authentication
  * Configuration Environment
  * Eslint, prettier and husky[pre-commit hooks]
  * MongoDB Connection
