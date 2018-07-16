@@ -7,6 +7,26 @@ const mongoose = require('./config/mongoose');
 // open mongoose connection
 mongoose.connect();
 
+/**
+ * Logging
+ * Routing
+ * Configuration Environment
+ * Eslint, prettier and husky[pre-commit hooks]
+ * MongoDB Connection
+ * Error Logging using Winston
+ * Error handling middleware
+ * Express Validation middleware
+ * Authentication
+ * Documentation [Swagger]
+ * Unit Testing
+ * Node Best Practices Github
+ * Security Best Practices
+ * Performance Best Practices
+ * npm scripts
+ * ReadME
+ * GraphQL
+ */
+
 // listen to requests
 app.listen(port, () => console.info(`server started on port ${port} (${env})`));
 
