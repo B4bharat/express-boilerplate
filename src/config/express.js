@@ -13,6 +13,7 @@ const { env } = require('./vars');
 
 // API Routes
 const userRoutes = require('../api/users/user.route');
+const authRoutes = require('../api/auth/auth.route');
 
 /**
  * Express instance
@@ -76,8 +77,9 @@ if (env === 'development') {
   }));
 }
 
-// mount api v1 routes
+// mount api routes
 app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 // if error is not an instanceOf APIError, convert it.
 app.use(error.converter);

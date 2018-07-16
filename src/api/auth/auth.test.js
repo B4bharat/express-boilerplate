@@ -4,9 +4,9 @@ const httpStatus = require('http-status');
 const { expect } = require('chai');
 const sinon = require('sinon');
 const moment = require('moment-timezone');
-const app = require('../../../index');
-const User = require('../../users/user.model');
-const RefreshToken = require('../../models/refreshToken.model');
+const app = require('../../index');
+const User = require('../users/user.model');
+const RefreshToken = require('./refreshToken.model');
 
 const sandbox = sinon.createSandbox();
 
