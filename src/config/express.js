@@ -11,6 +11,7 @@ const strategies = require('./passport');
 const error = require('../api/middlewares/error');
 const { env } = require('./vars');
 
+// API Routes
 const userRoutes = require('../api/users/user.route');
 
 /**
@@ -39,8 +40,6 @@ app.use(cors());
 // enable authentication
 app.use(passport.initialize());
 passport.use('jwt', strategies.jwt);
-passport.use('facebook', strategies.facebook);
-passport.use('google', strategies.google);
 
 // enable detailed API logging in dev env
 if (env === 'development') {

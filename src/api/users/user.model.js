@@ -39,10 +39,6 @@ const userSchema = new mongoose.Schema(
       index: true,
       trim: true,
     },
-    services: {
-      facebook: String,
-      google: String,
-    },
     role: {
       type: String,
       enum: roles,
