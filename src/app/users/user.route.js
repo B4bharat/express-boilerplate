@@ -14,6 +14,7 @@ router.param('userId', controller.load);
 
 router
   .route('/')
+
 /**
 	 * @api {get} v1/users List Users
 	 * @apiDescription Get a list of users
@@ -36,6 +37,7 @@ router
 	 * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
 	 */
   .get(validate(listUsers), controller.list)
+
 /**
 	 * @api {post} v1/users Create User
 	 * @apiDescription Create a new user
@@ -65,6 +67,7 @@ router
 
 router
   .route('/profile')
+
 /**
 	 * @api {get} v1/users/profile User Profile
 	 * @apiDescription Get logged in user profile information
@@ -87,6 +90,7 @@ router
 
 router
   .route('/:userId')
+
 /**
 	 * @api {get} v1/users/:id Get User
 	 * @apiDescription Get user information
@@ -108,6 +112,7 @@ router
 	 * @apiError (Not Found 404)    NotFound     User does not exist
 	 */
   .get(controller.get)
+
 /**
 	 * @api {put} v1/users/:id Replace User
 	 * @apiDescription Replace the whole user document with a new one
@@ -136,6 +141,7 @@ router
 	 * @apiError (Not Found 404)    NotFound     User does not exist
 	 */
   .put(validate(replaceUser), controller.replace)
+
 /**
 	 * @api {patch} v1/users/:id Update User
 	 * @apiDescription Update some fields of a user document
@@ -164,6 +170,7 @@ router
 	 * @apiError (Not Found 404)    NotFound     User does not exist
 	 */
   .patch(validate(updateUser), controller.update)
+
 /**
 	 * @api {patch} v1/users/:id Delete User
 	 * @apiDescription Delete a user

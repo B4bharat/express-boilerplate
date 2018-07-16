@@ -10,7 +10,9 @@ const { handler: errorHandler } = require('../middlewares/error');
 exports.load = async (req, res, next, id) => {
   try {
     const user = await User.get(id);
+
     req.locals = { user };
+
     return next();
   } catch (error) {
     return errorHandler(error, req, res);
@@ -37,6 +39,7 @@ exports.create = async (req, res, next) => {
   try {
     const user = new User(req.body);
     const savedUser = await user.save();
+
     res.status(httpStatus.CREATED);
     res.json(savedUser.transform());
   } catch (error) {
@@ -87,6 +90,7 @@ exports.list = async (req, res, next) => {
   try {
     const users = await User.list(req.query);
     const transformedUsers = users.map(user => user.transform());
+
     res.json(transformedUsers);
   } catch (error) {
     next(error);

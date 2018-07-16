@@ -67,6 +67,7 @@ userSchema.pre('save', async function save(next) {
     const rounds = env === 'test' ? 1 : 10;
 
     const hash = await bcrypt.hash(this.password, rounds);
+
     this.password = hash;
 
     return next();
@@ -83,7 +84,7 @@ userSchema.method({
     const transformed = {};
     const fields = ['id', 'name', 'email', 'picture', 'role', 'createdAt'];
 
-    fields.forEach((field) => {
+    fields.forEach(field => {
       transformed[field] = this[field];
     });
 
@@ -98,6 +99,7 @@ userSchema.method({
       iat: moment().unix(),
       sub: this._id,
     };
+
     return jwt.encode(playload, jwtSecret);
   },
 
@@ -125,6 +127,7 @@ userSchema.statics = {
       if (mongoose.Types.ObjectId.isValid(id)) {
         user = await this.findById(id).exec();
       }
+
       if (user) {
         return user;
       }
@@ -146,6 +149,7 @@ userSchema.statics = {
 	 */
   async findAndGenerateToken(options) {
     const { email, password, refreshObject } = options;
+
     if (!email) throw new APIError({ message: 'An email is required to generate a token' });
 
     const user = await this.findOne({ email }).exec();
@@ -153,6 +157,7 @@ userSchema.statics = {
       status: httpStatus.UNAUTHORIZED,
       isPublic: true,
     };
+
     if (password) {
       if (user && (await user.passwordMatches(password))) {
         return { user, accessToken: user.token() };
@@ -212,6 +217,7 @@ userSchema.statics = {
         stack: error.stack,
       });
     }
+
     return error;
   },
 
@@ -219,13 +225,16 @@ userSchema.statics = {
     service, id, email, name, picture,
   }) {
     const user = await this.findOne({ $or: [{ [`services.${service}`]: id }, { email }] });
+
     if (user) {
       user.services[service] = id;
       if (!user.name) user.name = name;
       if (!user.picture) user.picture = picture;
+
       return user.save();
     }
     const password = uuidv4();
+
     return this.create({
       services: { [service]: id },
       email,
