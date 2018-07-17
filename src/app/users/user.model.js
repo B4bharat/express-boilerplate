@@ -60,11 +60,13 @@ const userSchema = new mongoose.Schema(
  * - validations
  * - virtuals
  */
-userSchema.pre('save', async function save(next) {
+userSchema.pre('save', async function (next) {
   try {
     if (!this.isModified('password')) return next();
+    const testEnvSaltRounds = 1;
+    const devEnvSaltRounds = 10;
 
-    const rounds = env === 'test' ? 1 : 10;
+    const rounds = env === 'test' ? testEnvSaltRounds : devEnvSaltRounds;
 
     const hash = await bcrypt.hash(this.password, rounds);
 
@@ -183,13 +185,17 @@ userSchema.statics = {
 	 * @returns {Promise<User[]>}
 	 */
   list({
-    page = 1, perPage = 30, name, email, role,
+    page = 1, // eslint-disable-line no-magic-numbers
+    perPage = 30, // eslint-disable-line no-magic-numbers
+    name,
+    email,
+    role,
   }) {
     const options = omitBy({ name, email, role }, isNil);
 
     return this.find(options)
       .sort({ createdAt: -1 })
-      .skip(perPage * (page - 1))
+      .skip(perPage * (page - 1)) // eslint-disable-line no-magic-numbers
       .limit(perPage)
       .exec();
   },
@@ -202,7 +208,8 @@ userSchema.statics = {
 	 * @returns {Error|APIError}
 	 */
   checkDuplicateEmail(error) {
-    if (error.name === 'MongoError' && error.code === 11000) {
+    const duplicateEmailErrCode = 11000;
+    if (error.name === 'MongoError' && error.code === duplicateEmailErrCode) {
       return new APIError({
         message: 'Validation Error',
         errors: [

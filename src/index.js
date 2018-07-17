@@ -10,15 +10,14 @@ mongoose.connect();
 /**
  X* Logging
  X* Routing/Folder Structure
+ * Eslint from shetty's config, prettier and husky[pre-commit hooks]
  * Flow
  * Express JWT for Authentication
  * Configuration Environment
- * Eslint, prettier and husky[pre-commit hooks]
  * MongoDB Connection
  * Error handling middleware
  * Error Logging using Winston
  * Express Validation middleware
- * Authentication
  * Documentation [Swagger]
  * Unit Testing
  * Node Best Practices Github
