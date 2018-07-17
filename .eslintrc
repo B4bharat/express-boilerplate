@@ -49,5 +49,6 @@
 	"parserOptions": {
 		"ecmaVersion": 8
 	},
-	"extends": ["airbnb-base"]
+	"extends": ["airbnb-base", "prettier"],
+	"plugins": ["prettier"]
 }
