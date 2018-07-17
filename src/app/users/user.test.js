@@ -35,7 +35,8 @@ describe('Users API', async () => {
   let admin;
 
   const password = '123456';
-  const passwordHashed = await bcrypt.hash(password, 1);
+  const saltLength = 1;
+  const passwordHashed = await bcrypt.hash(password, saltLength);
 
   beforeEach(async () => {
     dbUsers = {
@@ -180,12 +181,14 @@ describe('Users API', async () => {
           const includesBranStark = some(res.body, bran);
           const includesjonSnow = some(res.body, john);
 
+          const resBodyLen = 2;
+
           // before comparing it is necessary to convert String to Date
           res.body[0].createdAt = new Date(res.body[0].createdAt);
           res.body[1].createdAt = new Date(res.body[1].createdAt);
 
           expect(res.body).to.be.an('array');
-          expect(res.body).to.have.lengthOf(2);
+          expect(res.body).to.have.lengthOf(resBodyLen);
           expect(includesBranStark).to.be.true;
           expect(includesjonSnow).to.be.true;
         });
@@ -201,12 +204,13 @@ describe('Users API', async () => {
           delete dbUsers.jonSnow.password;
           const john = format(dbUsers.jonSnow);
           const includesjonSnow = some(res.body, john);
+          const resBodyLen = 1;
 
           // before comparing it is necessary to convert String to Date
           res.body[0].createdAt = new Date(res.body[0].createdAt);
 
           expect(res.body).to.be.an('array');
-          expect(res.body).to.have.lengthOf(1);
+          expect(res.body).to.have.lengthOf(resBodyLen);
           expect(includesjonSnow).to.be.true;
         });
     });
@@ -221,17 +225,18 @@ describe('Users API', async () => {
           delete dbUsers.jonSnow.password;
           const john = format(dbUsers.jonSnow);
           const includesjonSnow = some(res.body, john);
+          const resBodyLen = 1;
 
           // before comparing it is necessary to convert String to Date
           res.body[0].createdAt = new Date(res.body[0].createdAt);
 
           expect(res.body).to.be.an('array');
-          expect(res.body).to.have.lengthOf(1);
+          expect(res.body).to.have.lengthOf(resBodyLen);
           expect(includesjonSnow).to.be.true;
         });
     });
 
-    it('should report error when pagination\'s parameters are not a number', () => {
+    it("should report error when pagination's parameters are not a number", () => {
       return request(app)
         .get('/v1/users')
         .set('Authorization', `Bearer ${adminAccessToken}`)
@@ -292,7 +297,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.NOT_FOUND)
         .then(res => {
-          expect(res.body.code).to.be.equal(404);
+          expect(res.body.code).to.be.equal(httpStatus.NOT_FOUND);
           expect(res.body.message).to.be.equal('User does not exist');
         });
     });
@@ -303,7 +308,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.NOT_FOUND)
         .then(res => {
-          expect(res.body.code).to.be.equal(404);
+          expect(res.body.code).to.be.equal(httpStatus.NOT_FOUND);
           expect(res.body.message).to.equal('User does not exist');
         });
     });
@@ -387,7 +392,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.NOT_FOUND)
         .then(res => {
-          expect(res.body.code).to.be.equal(404);
+          expect(res.body.code).to.be.equal(httpStatus.NOT_FOUND);
           expect(res.body.message).to.be.equal('User does not exist');
         });
     });
@@ -457,7 +462,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.NOT_FOUND)
         .then(res => {
-          expect(res.body.code).to.be.equal(404);
+          expect(res.body.code).to.be.equal(httpStatus.NOT_FOUND);
           expect(res.body.message).to.be.equal('User does not exist');
         });
     });
@@ -501,8 +506,9 @@ describe('Users API', async () => {
         .then(() => request(app).get('/v1/users'))
         .then(async () => {
           const users = await User.find({});
+          const noOfUsers = 1;
 
-          expect(users).to.have.lengthOf(1);
+          expect(users).to.have.lengthOf(noOfUsers);
         });
     });
 
@@ -512,7 +518,7 @@ describe('Users API', async () => {
         .set('Authorization', `Bearer ${adminAccessToken}`)
         .expect(httpStatus.NOT_FOUND)
         .then(res => {
-          expect(res.body.code).to.be.equal(404);
+          expect(res.body.code).to.be.equal(httpStatus.NOT_FOUND);
           expect(res.body.message).to.be.equal('User does not exist');
         });
     });
@@ -532,7 +538,7 @@ describe('Users API', async () => {
   });
 
   describe('GET /v1/users/profile', () => {
-    it('should get the logged user\'s info', () => {
+    it("should get the logged user's info", () => {
       delete dbUsers.jonSnow.password;
 
       return request(app)
@@ -548,9 +554,10 @@ describe('Users API', async () => {
       // fake time
       const clock = sinon.useFakeTimers();
       const expiredAccessToken = (await User.findAndGenerateToken(dbUsers.branStark)).accessToken;
+      const seconds = 60000;
 
       // move clock forward by minutes set in config + 1 minute
-      clock.tick(JWT_EXPIRATION * 60000 + 60000);
+      clock.tick((JWT_EXPIRATION * seconds) + seconds);
 
       return request(app)
         .get('/v1/users/profile')
