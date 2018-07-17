@@ -9,7 +9,25 @@
 		"func-names": [2, "never"],
 		"no-await-in-loop": 2,
 		"no-magic-numbers": 2,
-		"arrow-parens": [2, "as-needed"]
+		"arrow-parens": [2, "as-needed"],
+		"padding-line-between-statements": [
+			"error",
+			{ "blankLine": "always", "prev": "*", "next": "return" },
+			{ "blankLine": "always", "prev": "*", "next": "break" },
+			{ "blankLine": "always", "prev": "*", "next": "continue" },
+			{ "blankLine": "always", "prev": "directive", "next": "*" },
+			{ "blankLine": "always", "prev": "*", "next": "function" },
+			{ "blankLine": "always", "prev": "*", "next": "export" },
+			{ "blankLine": "any", "prev": "directive", "next": "directive" },
+			{ "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
+			{
+				"blankLine": "any",
+				"prev": ["const", "let", "var"],
+				"next": ["const", "let", "var"]
+			},
+			{ "blankLine": "always", "prev": "block", "next": "block" },
+			{ "blankLine": "always", "prev": "block-like", "next": "block-like" }
+		]
 	},
 	"env": {
 		"node": true,
