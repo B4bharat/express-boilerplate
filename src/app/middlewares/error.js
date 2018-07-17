@@ -23,6 +23,7 @@ const handler = (err, req, res, next) => {
   res.json(response);
   res.end();
 };
+
 exports.handler = handler;
 
 /**
@@ -59,5 +60,6 @@ exports.notFound = (req, res, next) => {
     message: 'Not found',
     status: httpStatus.NOT_FOUND,
   });
+
   return handler(err, req, res);
 };

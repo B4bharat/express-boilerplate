@@ -209,6 +209,7 @@ userSchema.statics = {
 	 */
   checkDuplicateEmail(error) {
     const duplicateEmailErrCode = 11000;
+
     if (error.name === 'MongoError' && error.code === duplicateEmailErrCode) {
       return new APIError({
         message: 'Validation Error',
