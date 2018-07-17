@@ -4,6 +4,7 @@ const compress = require('compression');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const helmet = require('helmet');
+const httpstatus = require('http-status');
 const winston = require('winston');
 const expressWinston = require('express-winston');
 const error = require('../app/middlewares/error');
@@ -39,42 +40,48 @@ app.use(cors());
 
 // enable detailed API logging in dev env
 if (env === 'development') {
-  expressWinston.requestWhitelist.push('body');
-  expressWinston.responseWhitelist.push('body');
-  app.use(expressWinston.logger({
-    statusLevels: false, // default value
-    level(req, res) {
-      let level = '';
+	expressWinston.requestWhitelist.push('body');
+	expressWinston.responseWhitelist.push('body');
+	app.use(
+		expressWinston.logger({
+			statusLevels: false, // default value
+			level(req, res) {
+				let level = '';
 
-      if (res.statusCode >= 100) {
-        level = 'info';
-      }
+				if (res.statusCode >= httpstatus.CONTINUE) {
+					level = 'info';
+				}
 
-      if (res.statusCode >= 400) {
-        level = 'warn';
-      }
+				if (res.statusCode >= httpstatus.BAD_REQUEST) {
+					level = 'warn';
+				}
 
-      if (res.statusCode >= 500) {
-        level = 'error';
-      }
+				if (res.statusCode >= httpstatus.INTERNAL_SERVER_ERROR) {
+					level = 'error';
+				}
 
-      // Ops is worried about hacking attempts so make Unauthorized and Forbidden critical
-      if (res.statusCode === 401 || res.statusCode === 403) {
-        level = 'critical';
-      }
+				// Ops is worried about hacking attempts so make Unauthorized and Forbidden critical
+				if (
+					res.statusCode === httpstatus.UNAUTHORIZED ||
+					res.statusCode === httpstatus.FORBIDDEN
+				) {
+					level = 'critical';
+				}
 
-      return level;
-    },
-    transports: [
-      new winston.transports.Console({
-        json: true,
-        colorize: true,
-      }),
-    ],
-    meta: true, // optional: log meta data about request (defaults to true)
-    msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
-    colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
-  }));
+				return level;
+			},
+			transports: [
+				new winston.transports.Console({
+					json: true,
+					colorize: true
+				})
+			],
+			meta: true, // optional: log meta data about request (defaults to true)
+			msg:
+				'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
+			colorStatus: true // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
+		})
+	);
 }
 
 // mount api routes

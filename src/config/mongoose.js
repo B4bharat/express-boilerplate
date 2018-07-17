@@ -5,26 +5,30 @@ const { mongo, env } = require('./vars');
 mongoose.Promise = Promise;
 
 // Exit application on error
-mongoose.connection.on('error', (err) => {
-  console.error(`MongoDB connection error: ${err}`);
-  process.exit(-1);
+mongoose.connection.on('error', err => {
+	console.error(`MongoDB connection error: ${err}`);
+	process.exit(-1); // eslint-disable-line no-magic-numbers
 });
 
 // print mongoose logs in dev env
 if (env === 'development') {
-  mongoose.set('debug', true);
+	mongoose.set('debug', true);
 }
 
 /**
-* Connect to mongo db
-*
-* @returns {object} Mongoose connection
-* @public
-*/
+ * Connect to mongo db
+ *
+ * @returns {object} Mongoose connection
+ * @public
+ */
 exports.connect = () => {
-  mongoose.connect(mongo.uri, {
-    keepAlive: 1,
-    useMongoClient: true,
-  });
-  return mongoose.connection;
+	mongoose.connect(
+		mongo.uri,
+		{
+			keepAlive: 1,
+			useMongoClient: true
+		}
+	);
+
+	return mongoose.connection;
 };
