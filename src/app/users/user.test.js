@@ -236,7 +236,7 @@ describe('Users API', async () => {
         });
     });
 
-    it("should report error when pagination's parameters are not a number", () => {
+    it('should report error when pagination\'s parameters are not a number', () => {
       return request(app)
         .get('/v1/users')
         .set('Authorization', `Bearer ${adminAccessToken}`)
@@ -538,7 +538,7 @@ describe('Users API', async () => {
   });
 
   describe('GET /v1/users/profile', () => {
-    it("should get the logged user's info", () => {
+    it('should get the logged user\'s info', () => {
       delete dbUsers.jonSnow.password;
 
       return request(app)

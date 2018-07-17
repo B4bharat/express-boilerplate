@@ -27,7 +27,15 @@
 			},
 			{ "blankLine": "always", "prev": "block", "next": "block" },
 			{ "blankLine": "always", "prev": "block-like", "next": "block-like" }
-		]
+		],
+		"lines-around-comment": [
+			2,
+			{
+				"beforeBlockComment": true
+			}
+		],
+		"class-methods-use-this": 0,
+		"quotes": ["error", "single"]
 	},
 	"env": {
 		"node": true,
