@@ -60,7 +60,7 @@ const userSchema = new mongoose.Schema(
  * - validations
  * - virtuals
  */
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function(next) {
 	try {
 		if (!this.isModified('password')) return next();
 		const testEnvSaltRounds = 1;
