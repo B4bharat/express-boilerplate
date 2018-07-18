@@ -13,7 +13,7 @@
 		"precommit": "yarn lint",
 		"prestart": "yarn docs",
 		"start": "cross-env NODE_ENV=production pm2 start ./src/index.js",
-		"dev": "nodemon ./src/index.js --exec 'npm run lint:watch && node'",
+		"dev": "nodemon ./src/index.js | npm run lint:watch",
 		"lint": "eslint **/*.js --ignore-path .gitignore --ignore-pattern internals/scripts",
 		"lint:fix": "yarn lint -- --fix",
 		"lint:watch": "onchange '**/*.js' -- prettier --write {{changed}}",
