@@ -1,32 +1,103 @@
 {
 	"rules": {
-		"no-tabs": 0,
+		"indent": [
+			"error",
+			"tab"
+		],
 		"no-console": 0,
 		"no-underscore-dangle": 0,
-		"no-unused-vars": [2, { "argsIgnorePattern": "next" }],
-		"no-use-before-define": [2, { "variables": false }],
+		"no-unused-vars": [
+			2,
+			{
+				"argsIgnorePattern": "next"
+			}
+		],
+		"no-use-before-define": [
+			2,
+			{
+				"variables": false
+			}
+		],
 		"no-multi-str": 0,
-		"func-names": [2, "never"],
+		"func-names": [
+			2,
+			"never"
+		],
 		"no-await-in-loop": 2,
 		"no-magic-numbers": 2,
-		"arrow-parens": [2, "as-needed"],
+		"arrow-parens": [
+			2,
+			"as-needed"
+		],
 		"padding-line-between-statements": [
 			"error",
-			{ "blankLine": "always", "prev": "*", "next": "return" },
-			{ "blankLine": "always", "prev": "*", "next": "break" },
-			{ "blankLine": "always", "prev": "*", "next": "continue" },
-			{ "blankLine": "always", "prev": "directive", "next": "*" },
-			{ "blankLine": "always", "prev": "*", "next": "function" },
-			{ "blankLine": "always", "prev": "*", "next": "export" },
-			{ "blankLine": "any", "prev": "directive", "next": "directive" },
-			{ "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
+			{
+				"blankLine": "always",
+				"prev": "*",
+				"next": "return"
+			},
+			{
+				"blankLine": "always",
+				"prev": "*",
+				"next": "break"
+			},
+			{
+				"blankLine": "always",
+				"prev": "*",
+				"next": "continue"
+			},
+			{
+				"blankLine": "always",
+				"prev": "directive",
+				"next": "*"
+			},
+			{
+				"blankLine": "always",
+				"prev": "*",
+				"next": "function"
+			},
+			{
+				"blankLine": "always",
+				"prev": "*",
+				"next": "export"
+			},
 			{
 				"blankLine": "any",
-				"prev": ["const", "let", "var"],
-				"next": ["const", "let", "var"]
+				"prev": "directive",
+				"next": "directive"
 			},
-			{ "blankLine": "always", "prev": "block", "next": "block" },
-			{ "blankLine": "always", "prev": "block-like", "next": "block-like" }
+			{
+				"blankLine": "always",
+				"prev": [
+					"const",
+					"let",
+					"var"
+				],
+				"next": "*"
+			},
+			{
+				"blankLine": "any",
+				"prev": [
+					"const",
+					"let",
+					"var"
+				],
+				"next": [
+					"const",
+					"let",
+					"var"
+				]
+			},
+			{
+				"blankLine": "always",
+				"prev": "block",
+				"next": "block"
+			},
+			{
+				"blankLine": "always",
+				"prev": "block-like",
+				"next": "block-like"
+			}
 		],
 		"lines-around-comment": [
 			2,
@@ -35,12 +106,23 @@
 			}
 		],
 		"class-methods-use-this": 0,
-		"quotes": ["error", "single"],
+		"quotes": [
+			"error",
+			"single"
+		],
 		"import/no-extraneous-dependencies": 0,
 		"import/prefer-default-export": 0,
-		"no-multiple-empty-lines": [2, { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
+		"no-multiple-empty-lines": [
+			2,
+			{
+				"max": 1,
+				"maxEOF": 0,
+				"maxBOF": 0
+			}
+		],
 		"prefer-const": 1,
-		"complexity": 0
+		"complexity": 0,
+		"prettier/prettier": "error"
 	},
 	"env": {
 		"node": true,
@@ -49,6 +131,11 @@
 	"parserOptions": {
 		"ecmaVersion": 8
 	},
-	"extends": ["airbnb-base", "prettier"],
-	"plugins": ["prettier"]
+	"extends": [
+		"airbnb-base",
+		"plugin:prettier/recommended"
+	],
+	"plugins": [
+		"prettier"
+	]
 }

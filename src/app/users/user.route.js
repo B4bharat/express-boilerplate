@@ -5,7 +5,7 @@ const {
 	listUsers,
 	createUser,
 	replaceUser,
-	updateUser
+	updateUser,
 } = require('./user.validation');
 
 const router = express.Router();

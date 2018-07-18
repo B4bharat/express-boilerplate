@@ -73,14 +73,14 @@ if (env === 'development') {
 			transports: [
 				new winston.transports.Console({
 					json: true,
-					colorize: true
-				})
+					colorize: true,
+				}),
 			],
 			meta: true, // optional: log meta data about request (defaults to true)
 			msg:
 				'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
-			colorStatus: true // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
-		})
+			colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
+		}),
 	);
 }
 

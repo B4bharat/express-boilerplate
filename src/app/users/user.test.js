@@ -44,26 +44,26 @@ describe('Users API', async () => {
 				email: 'branstark@gmail.com',
 				password: passwordHashed,
 				name: 'Bran Stark',
-				role: 'admin'
+				role: 'admin',
 			},
 			jonSnow: {
 				email: 'jonsnow@gmail.com',
 				password: passwordHashed,
-				name: 'Jon Snow'
-			}
+				name: 'Jon Snow',
+			},
 		};
 
 		user = {
 			email: 'sousa.dfs@gmail.com',
 			password,
-			name: 'Daniel Sousa'
+			name: 'Daniel Sousa',
 		};
 
 		admin = {
 			email: 'sousa.dfs@gmail.com',
 			password,
 			name: 'Daniel Sousa',
-			role: 'admin'
+			role: 'admin',
 		};
 
 		await User.remove({});
@@ -154,7 +154,7 @@ describe('Users API', async () => {
 					expect(field).to.be.equal('password');
 					expect(location).to.be.equal('body');
 					expect(messages).to.include(
-						'"password" length must be at least 6 characters long'
+						'"password" length must be at least 6 characters long',
 					);
 				});
 		});
@@ -240,7 +240,7 @@ describe('Users API', async () => {
 				});
 		});
 
-		it('should report error when pagination\'s parameters are not a number', () => {
+		it('should report error when pagination parameters are not a number', () => {
 			return request(app)
 				.get('/v1/users')
 				.set('Authorization', `Bearer ${adminAccessToken}`)
@@ -387,7 +387,7 @@ describe('Users API', async () => {
 					expect(field).to.be.equal('password');
 					expect(location).to.be.equal('body');
 					expect(messages).to.include(
-						'"password" length must be at least 6 characters long'
+						'"password" length must be at least 6 characters long',
 					);
 				});
 		});
@@ -544,7 +544,7 @@ describe('Users API', async () => {
 	});
 
 	describe('GET /v1/users/profile', () => {
-		it('should get the logged user\'s info', () => {
+		it('should get the info of logged user', () => {
 			delete dbUsers.jonSnow.password;
 
 			return request(app)
@@ -560,7 +560,7 @@ describe('Users API', async () => {
 			// fake time
 			const clock = sinon.useFakeTimers();
 			const expiredAccessToken = (await User.findAndGenerateToken(
-				dbUsers.branStark
+				dbUsers.branStark,
 			)).accessToken;
 			const seconds = 60000;
 
