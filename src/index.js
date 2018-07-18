@@ -10,7 +10,7 @@ mongoose.connect();
 /**
  X* Logging
  X* Routing/Folder Structure
- * Eslint from shetty's config, prettier and husky[pre-commit hooks]
+ X* Eslint from shetty's config, prettier and husky[pre-commit hooks]
  * Flow
  X* Express JWT for Authentication
  * Configuration Environment
