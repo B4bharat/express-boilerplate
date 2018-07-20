@@ -13,8 +13,8 @@ mongoose.connect();
  X* Eslint from shetty's config, prettier and husky[pre-commit hooks]
  * Flow
  X* Express JWT for Authentication
+ * mlab
  * Configuration Environment
- X* MongoDB Connection
  * Mongoose Wrapper with Singleton Connection - Pratik
  * Error handling middleware
  * Error Logging using Winston
