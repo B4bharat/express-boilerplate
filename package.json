@@ -53,7 +53,7 @@
 		"lodash": "^4.17.4",
 		"method-override": "^2.3.8",
 		"moment-timezone": "^0.5.13",
-		"mongoose": "^4.9.7",
+		"mongoose": "^5.2.4",
 		"pm2": "^3.0.0",
 		"uuid": "^3.1.0",
 		"winston": "^2.4.3"
