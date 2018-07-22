@@ -28,11 +28,7 @@
 		"postpublish": "git push --tags",
 		"deploy": "sh ./deploy.sh",
 		"docs": "apidoc -i src -o docs",
-		"postdocs": "opn docs/index.html",
-		"docker:start": "cross-env NODE_ENV=production pm2-docker start ./src/index.js",
-		"docker:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
-		"docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
-		"docker:test": "docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit"
+		"postdocs": "opn docs/index.html"
 	},
 	"dependencies": {
 		"axios": "^0.18.0",

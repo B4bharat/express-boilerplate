@@ -13,16 +13,16 @@ mongoose.connect();
  X* Eslint from shetty's config, prettier and husky[pre-commit hooks]
  X* Express JWT for Authentication
  * mlab
- * Documentation [Swagger]
+ X* Documentation [Swagger]
+ * Node Best Practices Github
+ * Security Best Practices - Later
+ * Performance Best Practices - Later
  * joi vs Express Validator
  * Configuration Environment
  * Mongoose Wrapper with Singleton Connection - Pratik
  * Error handling middleware
  * Error Logging using Winston
  * Unit Testing - Pratik
- * Node Best Practices Github
- * Security Best Practices - Later
- * Performance Best Practices - Later
  * npm scripts
  * ReadME
  * GraphQL
