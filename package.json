@@ -10,8 +10,8 @@
 		"yarn": "*"
 	},
 	"scripts": {
-		"precommit": "yarn lint",
-		"prestart": "yarn docs",
+		"precommit": "npm run lint",
+		"prestart": "npm run docs",
 		"start": "cross-env NODE_ENV=production pm2 start ./src/index.js",
 		"dev": "nodemon ./src/index.js | npm run lint:watch",
 		"lint": "./node_modules/.bin/eslint '**/*.js' --ignore-path .gitignore --ignore-pattern internals/scripts",
@@ -24,7 +24,7 @@
 		"test:watch": "cross-env NODE_ENV=test mocha --watch src/api/tests/unit",
 		"coverage": "nyc report --reporter=text-lcov | coveralls",
 		"postcoverage": "opn coverage/lcov-report/index.html",
-		"validate": "yarn lint && yarn test",
+		"validate": "npm run lint && npm run test",
 		"postpublish": "git push --tags",
 		"deploy": "sh ./deploy.sh",
 		"docs": "apidoc -i src -o docs",
