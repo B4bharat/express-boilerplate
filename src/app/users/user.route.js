@@ -19,7 +19,7 @@ router
 	.route('/')
 
 	/**
-	 * @api {get} v1/users List Users
+	 * @api {get} /api/users/users List Users
 	 * @apiDescription Get a list of users
 	 * @apiVersion 1.0.0
 	 * @apiName ListUsers
@@ -42,7 +42,7 @@ router
 	.get(validate(listUsers), controller.list)
 
 	/**
-	 * @api {post} v1/users Create User
+	 * @api {post} /api/users/users Create User
 	 * @apiDescription Create a new user
 	 * @apiVersion 1.0.0
 	 * @apiName CreateUser
@@ -72,7 +72,7 @@ router
 	.route('/profile')
 
 	/**
-	 * @api {get} v1/users/profile User Profile
+	 * @api {get} /api/users/users/profile User Profile
 	 * @apiDescription Get logged in user profile information
 	 * @apiVersion 1.0.0
 	 * @apiName UserProfile
@@ -95,7 +95,7 @@ router
 	.route('/:userId')
 
 	/**
-	 * @api {get} v1/users/:id Get User
+	 * @api {get} /api/users/users/:id Get User
 	 * @apiDescription Get user information
 	 * @apiVersion 1.0.0
 	 * @apiName GetUser
@@ -117,7 +117,7 @@ router
 	.get(controller.get)
 
 	/**
-	 * @api {put} v1/users/:id Replace User
+	 * @api {put} /api/users/users/:id Replace User
 	 * @apiDescription Replace the whole user document with a new one
 	 * @apiVersion 1.0.0
 	 * @apiName ReplaceUser
@@ -146,7 +146,7 @@ router
 	.put(validate(replaceUser), controller.replace)
 
 	/**
-	 * @api {patch} v1/users/:id Update User
+	 * @api {patch} /api/users/users/:id Update User
 	 * @apiDescription Update some fields of a user document
 	 * @apiVersion 1.0.0
 	 * @apiName UpdateUser
@@ -175,7 +175,7 @@ router
 	.patch(validate(updateUser), controller.update)
 
 	/**
-	 * @api {patch} v1/users/:id Delete User
+	 * @api {patch} /api/users/users/:id Delete User
 	 * @apiDescription Delete a user
 	 * @apiVersion 1.0.0
 	 * @apiName DeleteUser
