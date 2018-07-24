@@ -174,14 +174,9 @@ yarn docs
 
 ```bash
 # run container locally
-
-# run container in production
-
-# run tests
+sh deploy.sh
 
 ```
-
-## Deploy
 
 ## Inspirations
 
