@@ -1,25 +1,24 @@
 # Pulls OS
-FROM registry.bookmyshow.org/centos7:latest
+FROM registry.bookmyshow.org/alpine/nodejs8
 
 # Set environment variable
 ENV NODE_ENV=production
+
+RUN mkdir -p /home/code
 
 # Copies code and keys
 ADD src /home/code/
 ADD etc /etc
 ADD ssh /root/.ssh
-RUN chmod 400 /root/.ssh/id_rsa
 
-RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+# Update packages and install node modules & create log directory
+RUN apk update && \
+		apk add --no-cache make g++ openssh-client supervisor && \
+		cd /home/code/ && npm install && \
+		cd /var/log && mkdir supervisord
 
-# Downloads Node, Installs OS dependencies
-RUN yum clean all && \
-	yum install -y openssl-devel lua-devel gcc-c++ make git nodejs && \
-	cd /home/code && npm install && \
-	yum clean all
+WORKDIR /home/code
 
-# Expose
-EXPOSE 80
+EXPOSE 3030
 
-# Entrypoint
 ENTRYPOINT /usr/bin/supervisord -n -c /etc/supervisord.conf
