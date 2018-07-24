@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const cors = require('cors');
 const helmet = require('helmet');
 const httpstatus = require('http-status');
+const logger = require('morgan');
 const winston = require('winston');
 const expressWinston = require('express-winston');
 const error = require('../app/middlewares/error');
@@ -18,6 +19,10 @@ const userRoutes = require('../app/users/user.route');
  * @public
  */
 const app = express();
+
+if (env === 'development') {
+	app.use(logger('dev'));
+}
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json());
