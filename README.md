@@ -2,6 +2,13 @@
 
 Boilerplate/Generator/Starter Project for building RESTful APIs and microservices using Node.js, Express and MongoDB
 
+# Best Practices
+
+The boilerplate follows the following best practices and the users are expected to consult the same throughout the development process:
+- [Node Best Practices](https://github.com/i0natan/nodebestpractices)
+- [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html)
+- [Express Performance Best Practices](https://expressjs.com/en/advanced/best-practice-performance.html)
+
 ## Features
 
  - No transpilers, just vanilla javascript
