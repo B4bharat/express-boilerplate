@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-const httpStatus = require('http-status');
+const status = require('../utils/statusCodes');
 const { omitBy, isNil } = require('lodash');
 const bcrypt = require('bcryptjs');
 const moment = require('moment-timezone');
 const jwt = require('jwt-simple');
 const uuidv4 = require('uuid/v4');
-const APIError = require('../utils/APIError');
+const CustomError = require('../utils/customError');
 const { env, jwtSecret, jwtExpirationInterval } = require('../../config/vars');
 
 /**
@@ -134,10 +134,7 @@ userSchema.statics = {
 				return user;
 			}
 
-			throw new APIError({
-				message: 'User does not exist',
-				status: httpStatus.NOT_FOUND,
-			});
+			throw new CustomError(status.DATA_NOT_FOUND);
 		} catch (error) {
 			throw error;
 		}
@@ -152,15 +149,11 @@ userSchema.statics = {
 	async findAndGenerateToken(options) {
 		const { email, password, refreshObject } = options;
 
-		if (!email)
-			throw new APIError({
-				message: 'An email is required to generate a token',
-			});
+		if (!email) throw new CustomError(status.VALIDATION_FAILURE);
 
 		const user = await this.findOne({ email }).exec();
 		const err = {
-			status: httpStatus.UNAUTHORIZED,
-			isPublic: true,
+			code: status.UNAUTHORIZED_ACCESS.code,
 		};
 
 		if (password) {
@@ -177,7 +170,7 @@ userSchema.statics = {
 		} else {
 			err.message = 'Incorrect email or refreshToken';
 		}
-		throw new APIError(err);
+		throw new CustomError(err);
 	},
 
 	/**
@@ -214,18 +207,9 @@ userSchema.statics = {
 		const duplicateEmailErrCode = 11000;
 
 		if (error.name === 'MongoError' && error.code === duplicateEmailErrCode) {
-			return new APIError({
+			return new CustomError({
 				message: 'Validation Error',
-				errors: [
-					{
-						field: 'email',
-						location: 'body',
-						messages: ['"email" already exists'],
-					},
-				],
-				status: httpStatus.CONFLICT,
-				isPublic: true,
-				stack: error.stack,
+				code: status.VALIDATION_FAILURE.code,
 			});
 		}
 
@@ -256,7 +240,4 @@ userSchema.statics = {
 	},
 };
 
-/**
- * @typedef User
- */
 module.exports = mongoose.model('User', userSchema);

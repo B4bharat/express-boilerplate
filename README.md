@@ -41,6 +41,7 @@ Clone the repo and make it yours:
 git clone https://github.com/B4bharat/express-boilerplate
 cd express-boilerplate
 rm -rf .git
+cd src
 ```
 
 Install dependencies:
@@ -54,6 +55,7 @@ npm i or npm install
 Set environment variables:
 
 ```bash
+Go to root folder
 cp .env.example .env
 ```
 
@@ -90,14 +92,14 @@ yarn start
 |   |   +-- mongoose.js (mongoose configuration)
 |   |   +-- vars.js (environment specific variables)
 |   +-- index.js (main file, app initialisation)
+|   +-- .package-lock.json
+|   +-- .package.json
 +-- .editorconfig (configurations for the editors)
 +-- .env.example (sample dotenv file)
 +-- .eslintrc (eslint configuration)
 +-- .gitattributes
 +-- .gitignore
 +-- .prettierrc (prettier configuration)
-+-- .package-lock.json
-+-- .package.json
 +-- .README.MD
 +-- sonar-project.properties
 ```

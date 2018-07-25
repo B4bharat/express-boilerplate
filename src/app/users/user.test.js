@@ -1,7 +1,7 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-unused-expressions */
 const request = require('supertest');
-const httpStatus = require('http-status');
+const httpStatus = require('../utils/statusCodes');
 const { expect } = require('chai');
 const sinon = require('sinon');
 const bcrypt = require('bcryptjs');

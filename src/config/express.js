@@ -4,25 +4,14 @@ const compress = require('compression');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const helmet = require('helmet');
-const httpstatus = require('http-status');
-const logger = require('morgan');
-const winston = require('winston');
-const expressWinston = require('express-winston');
-const error = require('../app/middlewares/error');
+// const error = require('../app/middlewares/error');
+const Winstonlogger = require('./log');
 const { env } = require('./vars');
 
 // API Routes
-const userRoutes = require('../app/users/user.route');
+// const userRoutes = require('../app/users/user.route');
 
-/**
- * Express instance
- * @public
- */
 const app = express();
-
-if (env === 'development') {
-	app.use(logger('dev'));
-}
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json());
@@ -41,64 +30,23 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
-// TODO: enable JWT authentication
-
 // enable detailed API logging in dev env
 if (env === 'development') {
-	expressWinston.requestWhitelist.push('body');
-	expressWinston.responseWhitelist.push('body');
-	app.use(
-		expressWinston.logger({
-			statusLevels: false, // default value
-			level(req, res) {
-				let level = '';
+	const winstonlogger = new Winstonlogger();
 
-				if (res.statusCode >= httpstatus.CONTINUE) {
-					level = 'info';
-				}
-
-				if (res.statusCode >= httpstatus.BAD_REQUEST) {
-					level = 'warn';
-				}
-
-				if (res.statusCode >= httpstatus.INTERNAL_SERVER_ERROR) {
-					level = 'error';
-				}
-
-				// Ops is worried about hacking attempts so make Unauthorized and Forbidden critical
-				if (
-					res.statusCode === httpstatus.UNAUTHORIZED ||
-					res.statusCode === httpstatus.FORBIDDEN
-				) {
-					level = 'critical';
-				}
-
-				return level;
-			},
-			transports: [
-				new winston.transports.Console({
-					json: true,
-					colorize: true,
-				}),
-			],
-			meta: true, // optional: log meta data about request (defaults to true)
-			msg:
-				'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
-			colorStatus: true, // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
-		}),
-	);
+	app.use(winstonlogger.log);
 }
 
 // mount api routes
-app.use('/api/users', userRoutes);
+// app.use('/api/users', userRoutes);
 
-// if error is not an instanceOf APIError, convert it.
-app.use(error.converter);
+// // if error is not an instanceOf APIError, convert it.
+// app.use(error.converter);
 
-// catch 404 and forward to error handler
-app.use(error.notFound);
+// // catch 404 and forward to error handler
+// app.use(error.notFound);
 
-// error handler, send stacktrace only during development
-app.use(error.handler);
+// // error handler, send stacktrace only during development
+// app.use(error.handler);
 
 module.exports = app;
