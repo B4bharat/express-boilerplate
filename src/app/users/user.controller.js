@@ -1,4 +1,4 @@
-const httpStatus = require('http-status');
+const status = require('../utils/statusCodes');
 const { omit } = require('lodash');
 const User = require('./user.model');
 const { handler: errorHandler } = require('../middlewares/error');
@@ -40,7 +40,7 @@ exports.create = async (req, res, next) => {
 		const user = new User(req.body);
 		const savedUser = await user.save();
 
-		res.status(httpStatus.CREATED);
+		res.status(status.API_SUCCESS.code);
 		res.json(savedUser.transform());
 	} catch (error) {
 		next(User.checkDuplicateEmail(error));
@@ -106,6 +106,6 @@ exports.remove = (req, res, next) => {
 
 	user
 		.remove()
-		.then(() => res.status(httpStatus.NO_CONTENT).end())
+		.then(() => res.status(status.DATA_NOT_FOUND.code).end())
 		.catch(e => next(e));
 };

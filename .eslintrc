@@ -133,7 +133,7 @@
 	},
 	"extends": [
 		"airbnb-base",
-		"plugin:prettier/recommended"
+		"prettier"
 	],
 	"plugins": [
 		"prettier"

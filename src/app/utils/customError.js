@@ -17,7 +17,7 @@ class CustomError extends Error {
 		this.status = params.code;
 
 		if (extra) {
-			this.otherMessage = extra;
+			this.additionalInfo = extra;
 		}
 	}
 }
