@@ -99,7 +99,10 @@ yarn start
 +-- .gitattributes
 +-- .gitignore
 +-- .prettierrc (prettier configuration)
++-- build.sh
++-- deploy.sh
 +-- .README.MD
++-- run.sh
 +-- sonar-project.properties
 ```
 
