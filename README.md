@@ -41,22 +41,21 @@ Clone the repo and make it yours:
 git clone https://github.com/B4bharat/express-boilerplate
 cd express-boilerplate
 rm -rf .git
-cd src
 ```
 
-Install dependencies:
+## Set environment variables:
+
+```bash
+cp .env.example .env
+```
+
+## Install dependencies:
 
 Note: DO NOT use npm and yarn alternately, stick with one package manager only because both produce their own '.lock' files and may result in inconsistencies with dependencies
 
 ```bash
+cd src
 npm i or npm install
-```
-
-Set environment variables:
-
-```bash
-Go to root folder
-cp .env.example .env
 ```
 
 ## Running Locally
